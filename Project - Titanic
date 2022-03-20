@@ -1,0 +1,436 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "2. Describing and Interrogating Data.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/RautenM/PythonFundamentals/blob/main/Project%20-%20Titanic\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ZlD9__2sD2jr"
+      },
+      "source": [
+        "# Titanic\n",
+        "\n",
+        "When using pandas we first need to import it \n",
+        "\n",
+        "` import pandas as pd ` \n",
+        "\n",
+        "\n",
+        "Firstlooking at information as summmary statistics, and interrogate it to find information. \n",
+        "This is the least risky in terms of bias and inaccurate conclusions as it should focus just on what data is presented to us.\n",
+        "\n",
+        "\n",
+        "Calculate the, average, middle value and the total range of values (max - min)  \n",
+        "\n",
+        "I will show show the first 5 rows of the dataframe and the last 5 rows also will show information about the overall dataset, including how many Null values exist in each column, the data type of each column and dataframes length then statistics for all numeric columns   "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "c1Vyby7pQOvq"
+      },
+      "source": [
+        "I am going to open Titanic dataset and see descriptive info\n",
+        "---\n",
+        "\n",
+        "The Titanic dataset is stored at this URL:\n",
+        "https://raw.githubusercontent.com/pandas-dev/pandas/master/doc/data/titanic.csv\n",
+        "\n",
+        "1. Read the dataset into a pandas dataframe that you will call **titanic**.\n",
+        "\n",
+        "2. Write a function called **summary** that will: \n",
+        "* Display the first 5 rows of the dataset \n",
+        "* Use info() to display a technical summary of the data\n",
+        "* Use describe() to display a numerical summary of the data \n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lRJhN1GsZSQc",
+        "outputId": "26e0650f-c74f-4725-d8c9-67f5cdf6171c",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = \"https://raw.githubusercontent.com/pandas-dev/pandas/master/doc/data/titanic.csv\"\n",
+        "titanic = pd.read_csv(data)\n",
+        "\n",
+        "def get_summary(df):\n",
+        "  # add code below which prints the first 5 rows of the dataset, the info and the numerical summary\n",
+        "  print(df.head())\n",
+        "  print(df.info())\n",
+        "  print(df.describe())\n",
+        "  print(df.count())\n",
+        "\n",
+        "# run and visually test using example above\n",
+        "get_summary(titanic)"
+      ],
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "   PassengerId  Survived  Pclass  \\\n",
+            "0            1         0       3   \n",
+            "1            2         1       1   \n",
+            "2            3         1       3   \n",
+            "3            4         1       1   \n",
+            "4            5         0       3   \n",
+            "\n",
+            "                                                Name     Sex   Age  SibSp  \\\n",
+            "0                            Braund, Mr. Owen Harris    male  22.0      1   \n",
+            "1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   \n",
+            "2                             Heikkinen, Miss. Laina  female  26.0      0   \n",
+            "3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   \n",
+            "4                           Allen, Mr. William Henry    male  35.0      0   \n",
+            "\n",
+            "   Parch            Ticket     Fare Cabin Embarked  \n",
+            "0      0         A/5 21171   7.2500   NaN        S  \n",
+            "1      0          PC 17599  71.2833   C85        C  \n",
+            "2      0  STON/O2. 3101282   7.9250   NaN        S  \n",
+            "3      0            113803  53.1000  C123        S  \n",
+            "4      0            373450   8.0500   NaN        S  \n",
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 891 entries, 0 to 890\n",
+            "Data columns (total 12 columns):\n",
+            " #   Column       Non-Null Count  Dtype  \n",
+            "---  ------       --------------  -----  \n",
+            " 0   PassengerId  891 non-null    int64  \n",
+            " 1   Survived     891 non-null    int64  \n",
+            " 2   Pclass       891 non-null    int64  \n",
+            " 3   Name         891 non-null    object \n",
+            " 4   Sex          891 non-null    object \n",
+            " 5   Age          714 non-null    float64\n",
+            " 6   SibSp        891 non-null    int64  \n",
+            " 7   Parch        891 non-null    int64  \n",
+            " 8   Ticket       891 non-null    object \n",
+            " 9   Fare         891 non-null    float64\n",
+            " 10  Cabin        204 non-null    object \n",
+            " 11  Embarked     889 non-null    object \n",
+            "dtypes: float64(2), int64(5), object(5)\n",
+            "memory usage: 83.7+ KB\n",
+            "None\n",
+            "       PassengerId    Survived      Pclass         Age       SibSp  \\\n",
+            "count   891.000000  891.000000  891.000000  714.000000  891.000000   \n",
+            "mean    446.000000    0.383838    2.308642   29.699118    0.523008   \n",
+            "std     257.353842    0.486592    0.836071   14.526497    1.102743   \n",
+            "min       1.000000    0.000000    1.000000    0.420000    0.000000   \n",
+            "25%     223.500000    0.000000    2.000000   20.125000    0.000000   \n",
+            "50%     446.000000    0.000000    3.000000   28.000000    0.000000   \n",
+            "75%     668.500000    1.000000    3.000000   38.000000    1.000000   \n",
+            "max     891.000000    1.000000    3.000000   80.000000    8.000000   \n",
+            "\n",
+            "            Parch        Fare  \n",
+            "count  891.000000  891.000000  \n",
+            "mean     0.381594   32.204208  \n",
+            "std      0.806057   49.693429  \n",
+            "min      0.000000    0.000000  \n",
+            "25%      0.000000    7.910400  \n",
+            "50%      0.000000   14.454200  \n",
+            "75%      0.000000   31.000000  \n",
+            "max      6.000000  512.329200  \n",
+            "PassengerId    891\n",
+            "Survived       891\n",
+            "Pclass         891\n",
+            "Name           891\n",
+            "Sex            891\n",
+            "Age            714\n",
+            "SibSp          891\n",
+            "Parch          891\n",
+            "Ticket         891\n",
+            "Fare           891\n",
+            "Cabin          204\n",
+            "Embarked       889\n",
+            "dtype: int64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MReHVTG2a7Yt"
+      },
+      "source": [
+        "### Now I am going to displaying other statistics\n",
+        "---\n",
+        "\n",
+        "1.  The total number of passengers on the titanic\n",
+        "2.  The age of the youngest passenger\n",
+        "3.  The most expensive ticket price\n",
+        "4.  The range of ticket prices\n",
+        "5.  The number of passenges with cabins\n",
+        "6.  The code for the port where the highest number of passengers embarked\n",
+        "7.  The most populous gender\n",
+        "8.  The standard deviation for age"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nfF3lqNFX_Wr",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "4254dfaa-d770-4fe0-e9bd-9367ab802135"
+      },
+      "source": [
+        "import math \n",
+        "\n",
+        "\n",
+        "def get_statistics(df):\n",
+        "  # add code below to return the stats listed above \n",
+        "  passengers = titanic[\"PassengerId\"].count()\n",
+        "  youngest = titanic[\"Age\"].min()\n",
+        "  most_expensive = titanic[\"Fare\"].max()\n",
+        "  range_ticket = titanic[\"Fare\"].max()- titanic[\"Fare\"].min()\n",
+        "  no_cabins = titanic[\"Cabin\"].count()\n",
+        "  embarked = titanic['Embarked'].mode()\n",
+        "  gender = titanic[\"Sex\"].mode()\n",
+        "  variance = float(titanic[\"Age\"].var())\n",
+        "  sd = math.sqrt(variance)\n",
+        "    \n",
+        "\n",
+        "  return passengers, youngest, most_expensive, range_ticket, no_cabins, embarked[0], gender[0], sd \n",
+        "\n",
+        "actual = get_statistics(titanic)\n",
+        "expected = (891, 0.42, 512.3292, 512.3292, 204, 'S', 'male', 14.526497332334044)\n",
+        "\n",
+        "if actual == expected:\n",
+        "  print(\"Test passed\", actual)\n",
+        "else: \n",
+        "  print(\"Test failed, expected\", expected, \"but got\", actual)\n",
+        "\n",
+        "\n",
+        "    #return passengers, youngest, most_expensive, range_ticket, no_cabins, embarked[0], gender[0], sd \n",
+        "\n",
+        "\n",
+        "# run and test if answers are correct \n",
+        "\n"
+      ],
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Test passed (891, 0.42, 512.3292, 512.3292, 204, 'S', 'male', 14.526497332334044)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "DWoxUSTec8-R"
+      },
+      "source": [
+        "### I will need to aggregating statistics grouped by category\n",
+        "---\n",
+        "\n",
+        "I am looking particularly at the section on Aggregating statistics grouped by category.\n",
+        "\n",
+        "Will write function called **grouped** which displays:\n",
+        "\n",
+        "1.  The mean age for male versus female Titanic passengers?\n",
+        "2.  The mean ticket fare price for each of the sex and cabin class combinations?\n",
+        "3.  The mean ticket fare price for passengers who embarked at each port?\n",
+        "4.  Which passenger class had the highest number of survivors (for now, just show the statistics - it may not be meaningful yet)? *hint: you will need to filter for just survived rows, try using &* \n",
+        "\n",
+        "**Expected output**\n",
+        "```\n",
+        "            Age\n",
+        " Sex              \n",
+        " female  27.915709\n",
+        " male    30.726645, \n",
+        " \n",
+        " Pclass  Sex   \n",
+        " 1       female    106.125798\n",
+        "         male       67.226127\n",
+        " 2       female     21.970121\n",
+        "         male       19.741782\n",
+        " 3       female     16.118810\n",
+        "         male       12.661633\n",
+        "\n",
+        " Name: Fare, dtype: float64 \n",
+        " \n",
+        " Embarked\n",
+        " C    59.954144\n",
+        " Q    13.276030\n",
+        " S    27.079812\n",
+        " Name: Fare, dtype: float64\n",
+        " \n",
+        " 0    1\n",
+        " dtype: int64\n",
+        " ```"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Q2yydIaYdLqa",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a73a9b53-9c7b-4ef8-f326-61eafddb0f2f"
+      },
+      "source": [
+        "def get_grouped(df):\n",
+        "  # add code below to return the above stats \n",
+        "  average_age = titanic[[\"Sex\", \"Age\"]].groupby(\"Sex\").mean()\n",
+        "  fare_per_class = titanic.groupby([\"Pclass\", \"Sex\"])[\"Fare\"].mean()\n",
+        "  embarked_by_fares = titanic[[\"Embarked\",\"Fare\"]].groupby(\"Embarked\").mean()\n",
+        "  survived_mean = titanic.groupby([\"Sex\", \"Pclass\"])[\"Survived\"].mean()\n",
+        "\n",
+        "  print(average_age)\n",
+        "  print(fare_per_class)\n",
+        "  print(embarked_by_fares)\n",
+        "  print(survived_mean)\n",
+        "\n",
+        "# run and test visually using the above expected output \n",
+        "get_grouped(titanic)\n",
+        "\n",
+        "\n",
+        "  \n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "# run and test visually using the above expected output \n",
+        "get_grouped(titanic)\n",
+        "\n"
+      ],
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "              Age\n",
+            "Sex              \n",
+            "female  27.915709\n",
+            "male    30.726645\n",
+            "Pclass  Sex   \n",
+            "1       female    106.125798\n",
+            "        male       67.226127\n",
+            "2       female     21.970121\n",
+            "        male       19.741782\n",
+            "3       female     16.118810\n",
+            "        male       12.661633\n",
+            "Name: Fare, dtype: float64\n",
+            "               Fare\n",
+            "Embarked           \n",
+            "C         59.954144\n",
+            "Q         13.276030\n",
+            "S         27.079812\n",
+            "Sex     Pclass\n",
+            "female  1         0.968085\n",
+            "        2         0.921053\n",
+            "        3         0.500000\n",
+            "male    1         0.368852\n",
+            "        2         0.157407\n",
+            "        3         0.135447\n",
+            "Name: Survived, dtype: float64\n",
+            "              Age\n",
+            "Sex              \n",
+            "female  27.915709\n",
+            "male    30.726645\n",
+            "Pclass  Sex   \n",
+            "1       female    106.125798\n",
+            "        male       67.226127\n",
+            "2       female     21.970121\n",
+            "        male       19.741782\n",
+            "3       female     16.118810\n",
+            "        male       12.661633\n",
+            "Name: Fare, dtype: float64\n",
+            "               Fare\n",
+            "Embarked           \n",
+            "C         59.954144\n",
+            "Q         13.276030\n",
+            "S         27.079812\n",
+            "Sex     Pclass\n",
+            "female  1         0.968085\n",
+            "        2         0.921053\n",
+            "        3         0.500000\n",
+            "male    1         0.368852\n",
+            "        2         0.157407\n",
+            "        3         0.135447\n",
+            "Name: Survived, dtype: float64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pQV2NO8umBSk"
+      },
+      "source": [
+        "# Reflection\n",
+        "----\n",
+        "\n",
+        "## What skills have you demonstrated in completing this notebook?"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "NUVvt2r0mCKq"
+      },
+      "source": [
+        "Your answer:"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "SOrbWOuFmObq"
+      },
+      "source": [
+        "## What caused you the most difficulty?"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "G_eGng1GmO78"
+      },
+      "source": [
+        "Your answer:"
+      ]
+    }
+  ]
+}
